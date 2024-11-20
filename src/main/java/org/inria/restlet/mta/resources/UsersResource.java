@@ -58,6 +58,7 @@ public class UsersResource extends ServerResource
             current.put("name", user.getName());
             current.put("url", getReference() + "/" + user.getId());
             jsonUsers.add(current);
+
         }
         JSONArray jsonArray = new JSONArray(jsonUsers);
         return new JsonRepresentation(jsonArray);
@@ -82,7 +83,5 @@ public class UsersResource extends ServerResource
         JsonRepresentation result = new JsonRepresentation(resultObject);
         return result;
     }
-
-
 
 }

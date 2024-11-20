@@ -1,8 +1,10 @@
 package org.inria.restlet.mta.database;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.inria.restlet.mta.internals.Tweet;
 import org.inria.restlet.mta.internals.User;
 
 /**
@@ -21,8 +23,6 @@ public class InMemoryDatabase
 
     /** User Hashmap. */
     Map<Integer, User> users_;
-
-    private List<User> userList = new ArrayList<>();
 
 
     public InMemoryDatabase()
@@ -57,7 +57,4 @@ public class InMemoryDatabase
         return users_.get(id);
     }
 
-    public List<Tweet> getTweets(int id){
-        return getUser(id).getTweets();
-    }
 }

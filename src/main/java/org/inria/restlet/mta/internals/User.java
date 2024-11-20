@@ -4,69 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * User
- *
- * @author ctedeschi
- * @author msimonin
- *
+ * Represents a user in the system.
  */
-public class User
-{
+public class User {
 
-    /** Internal id of the user.*/
     private int id_;
-
-    /** Name of the user.*/
     private String name_;
-
-    /** Age of the user.*/
     private int age_;
+    private List<Tweet> tweets_;
 
-
-    /** collection of tweets of the user. */
-    private List<Tweet> tweetList_;
-
-
-    public User(String name, int age)
-    {
-        name_ = name;
-        age_ = age;
-        tweetList_ = new ArrayList();
-        tweetList_.add(new Tweet(null,this)) ;
+    public User(String name, int age) {
+        this.name_ = name;
+        this.age_ = age;
+        this.tweets_ = new ArrayList<>();
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name_;
     }
 
-    public void setName(String name)
-    {
-        name_ = name;
+    public void setName(String name) {
+        this.name_ = name;
     }
 
-    public int getAge()
-    {
+    public int getAge() {
         return age_;
     }
 
-    public void setAge(int age)
-    {
-        age_ = age;
+    public void setAge(int age) {
+        this.age_ = age;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id_;
     }
 
-    public void setId(int id)
-    {
-        id_ = id;
+    public void setId(int id) {
+        this.id_ = id;
     }
 
     public List<Tweet> getTweets() {
-        return this.tweetList_;
+        return tweets_;
+    }
+
+    public void addTweet(Tweet tweet) {
+        this.tweets_.add(tweet);
     }
 }

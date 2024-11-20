@@ -1,45 +1,36 @@
 package org.inria.restlet.mta.internals;
 
+import java.time.LocalDateTime;
+
+/**
+ * Represents a Tweet.
+ */
 public class Tweet {
 
-    //tweet ID
-    private int id_;
+    /** Content of the tweet */
+    private String content_;
 
-    //Tweet content
-    private String text_;
+    /** Timestamp of the tweet */
+    private LocalDateTime timestamp_;
 
-    //Tweet Author
-    private User author_;
-
-
-
-    public Tweet(String text_, User author_) {
-        this.id_ = id_;
-        this.text_ = text_;
-        this.author_ = author_;
+    public Tweet(String content) {
+        this.content_ = content;
+        this.timestamp_ = LocalDateTime.now();
     }
 
-    public int getId_() {
-        return id_;
+    public String getContent() {
+        return content_;
     }
 
-    public void setId_(int id_) {
-        this.id_ = id_;
+    public void setContent(String content) {
+        this.content_ = content;
     }
 
-    public String getText_() {
-        return text_;
+    public LocalDateTime getTimestamp() {
+        return timestamp_;
     }
 
-    public void setText_(String text_) {
-        this.text_ = text_;
-    }
-
-    public User getAuthor_() {
-        return author_;
-    }
-
-    public void setAuthor_(User author_) {
-        this.author_ = author_;
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp_ = timestamp;
     }
 }
