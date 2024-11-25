@@ -1,2 +1,2 @@
-public class Client extends Thread{
+    public class Client extends Thread{
 }
