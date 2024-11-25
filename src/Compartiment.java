@@ -5,4 +5,14 @@ public class Compartiment {
     static final int BORNE_INF = 100;
 
 
+    public Compartiment(int i) {
+    }
+
+
+    public synchronized void approvisionner() {
+
+
+        notify();
+    }
+
 }
