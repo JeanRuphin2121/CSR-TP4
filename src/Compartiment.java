@@ -2,9 +2,9 @@ public class Compartiment {
 
 
     static final int QUANTITE_INITIAL = 1000; //La quantité est en grammes;
-    static final int BORNE_INF = 100;
-    int current_stock;
-    int number; //Numéro de Compartiment
+    static final int BORNE_INF = 100; // MInimum avant approvisionner
+    private  int current_stock;
+    private  int number; //Numéro de Compartiment
 
 
     public Compartiment(int i) {
@@ -24,6 +24,7 @@ public class Compartiment {
         if (current_stock < BORNE_INF) {
             int manque = QUANTITE_INITIAL - current_stock;  // Ce qu'il manque pour atteindre le stock initial
             this.current_stock += manque;
+            System.out.println("Le compartiment " + number + " a été approvisionné.");
             notifyAll();
         }
     }

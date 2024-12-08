@@ -17,7 +17,7 @@ public class Client extends Thread {
     public void run() {
         try {
             entrerDansRestaurant();
-            allerAuBuffet();
+            //allerAuBuffet();
             allerAuStandDeCuisson();
             manger();
             sortir();
@@ -35,10 +35,10 @@ public class Client extends Thread {
             restaurant.prendrePlace();
             etat = EtatClient.AT_THE_BUFFET; // Mise à jour de l'état
         }
-        System.out.println("Client " + id + " entre dans le restaurant.")
+        System.out.println("Client " + id + " entre dans le restaurant.");
     }
 
-    private void allerAuBuffet() throws InterruptedException {
+    /*private void allerAuBuffet() throws InterruptedException {
         for (Compartiment compartiment : restaurant.getCompartiments()) {
             synchronized (compartiment) {
                 int portion = random.nextInt(101);
@@ -49,22 +49,15 @@ public class Client extends Thread {
                 compartiment.prendreNourriture(portion);
             }
             Thread.sleep(200 + random.nextInt(100)); //Temps pour se servir
-            int portion = random.nextInt(101); // Portion entre 0 et 100g
-            compartiment.prendreNourriture(portion);
-            Thread.sleep(200 + random.nextInt(100)); // Temps passé à se servir
         }
         System.out.println("Client " + id + " a terminé de se servir au buffet.");
         etat = EtatClient.WAITING_FOR_THE_COOK; // Mise à jour de l'état
-    }
+    }*/
 
     private void allerAuStandDeCuisson() throws InterruptedException {
         System.out.println("Client " + id + " attend pour la cuisson.");
-        synchronized (restaurant.getStandCuisson()) {
-            restaurant.getStandCuisson().ajouterCommande(this); // Le client ajoute sa commande
-            restaurant.getStandCuisson().wait(); // Attente de la cuisson
-        }
-        System.out.println("Cuisson terminée. Client " + id + " récupère son plat.");
-
+        restaurant.getStandCuisson().demanderCuisson(this);
+        System.out.println("Client " + id + " récupère son plat et quitte le stand de cuisson.");
     }
 
 

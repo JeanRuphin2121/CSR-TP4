@@ -19,7 +19,7 @@ public class Restaurant {
             compartiments[i] = new Compartiment(i);
 
         /* Instanciation des clients */
-        Random r = new Random();
+        //Random r = new Random();
         for (int i = 0; i < NBRE_CLIENT; i++) {
             //clients[i] = new Client();
             clients[i] = new Client(i, this);
