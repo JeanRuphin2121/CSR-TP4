@@ -1,7 +1,7 @@
 package org.inria.restlet.mta.main;
 
-import org.inria.restlet.mta.application.MyTwitterApplication;
-import org.inria.restlet.mta.database.InMemoryDatabase;
+import org.inria.restlet.mta.application.BuffetApplication;
+import org.inria.restlet.mta.database.Restaurant;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.Context;
@@ -35,10 +35,10 @@ public final class Main
         component.getServers().add(Protocol.HTTP, 8124);
 
         // Create an application
-        Application application = new MyTwitterApplication(context);
+        Application application = new BuffetApplication(context);
 
         // Add the db into component's context
-        InMemoryDatabase db = new InMemoryDatabase ();
+        Restaurant db = new Restaurant();
         context.getAttributes().put("database", db);
         component.getDefaultHost().attach(application);
 

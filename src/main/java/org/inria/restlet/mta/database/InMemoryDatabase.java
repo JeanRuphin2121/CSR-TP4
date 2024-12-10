@@ -45,7 +45,7 @@ public class InMemoryDatabase
         users_.put(userCount_, user);
         userCount_ ++;
         return user;
-        // Voici la modification que je fais
+
     }
 
     public Collection<User> getUsers()
