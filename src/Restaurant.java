@@ -1,64 +1,51 @@
-import java.util.Random;
-
 public class Restaurant {
 
-    static final int NOMBRE_PLACES= 25;
-    static final int NBRE_CLIENT=40;
-    static final int NB_COMPARTIMENS = 4;
+    String[] nomsCompartiments = {"poisson cru", "viande crue", "légumes crus", "nouilles froides"};
 
-    private int placesDispos = NOMBRE_PLACES;
-    private Compartiment [] compartiments = new Compartiment [NB_COMPARTIMENS];
+    static int NOMBRE_PLACES = 25;
+    static final int NBRE_CLIENT = 40;
+    static final int NB_COMPARTIMENTS = 4;
+
+    private Compartiment[] compartiments = new Compartiment[NB_COMPARTIMENTS];
     private Client[] clients = new Client[NBRE_CLIENT];
-    private Employe employe = null;
-    private final StandDeCuisson standCuisson = new StandDeCuisson();
+    static StandDeCuisson standCuisson;
+
+
 
     public Restaurant() {
 
         /* Instanciation des compartiments */
-        for (int i = 0; i < NB_COMPARTIMENS; i++)
-            compartiments[i] = new Compartiment(i);
+        for (int i = 0; i < NB_COMPARTIMENTS; i++) {
+            compartiments[i] = new Compartiment(nomsCompartiments[i]);
+        }
 
         /* Instanciation des clients */
-        //Random r = new Random();
         for (int i = 0; i < NBRE_CLIENT; i++) {
-            //clients[i] = new Client();
-            clients[i] = new Client(i, this);
+            clients[i] = new Client(i, compartiments);
         }
 
         /* Instanciation de l'employé */
-        employe = new Employe(this);
+        Employe employe = new Employe(compartiments);
+
+        /* Instanciation du stand de cuisson */
+        standCuisson = new StandDeCuisson();
+
+        /* Instanciation et démarrage du cuisinier */
+        Cuisinier cuisinier = new Cuisinier(standCuisson);
+        cuisinier.setDaemon(true);  // Définir le thread cuisinier comme démon avant de le démarrer
+        cuisinier.start();
 
         /* Démarrage des clients */
         for (int i = 0; i < NBRE_CLIENT; i++) {
             clients[i].start();
         }
 
-        /*Démarrage de l'employé*/
+        /* Démarrage de l'employé */
+        employe.setDaemon(true);  // Définir l'employé comme démon avant de démarrer
         employe.start();
     }
 
-    public synchronized void prendrePlace() {
-        placesDispos--;
-    }
-
-    public synchronized void libererPlace(){
-        placesDispos++;
-    }
-
-    public int getPlacesDispos(){
-        return placesDispos;
-    }
-
-    public Compartiment[] getCompartiments() {
-        return compartiments;
-    }
-
-    public StandDeCuisson getStandCuisson() {
-        return standCuisson;
-    }
-
     public static void main(String[] args) {
-
         new Restaurant();
     }
 }
