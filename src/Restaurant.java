@@ -1,5 +1,7 @@
 public class Restaurant {
 
+    String[] nomsCompartiments = {"poisson cru", "viande crue", "légumes crus", "nouilles froides"};
+
     static int NOMBRE_PLACES = 25;
     static final int NBRE_CLIENT = 40;
     static final int NB_COMPARTIMENTS = 4;
@@ -8,11 +10,13 @@ public class Restaurant {
     private Client[] clients = new Client[NBRE_CLIENT];
     static StandDeCuisson standCuisson;
 
+
+
     public Restaurant() {
 
         /* Instanciation des compartiments */
         for (int i = 0; i < NB_COMPARTIMENTS; i++) {
-            compartiments[i] = new Compartiment(i);
+            compartiments[i] = new Compartiment(nomsCompartiments[i]);
         }
 
         /* Instanciation des clients */

@@ -4,11 +4,11 @@ public class Compartiment {
     static final int QUANTITE_INITIAL = 1000; //La quantité est en grammes donc 1kg
     static final int BORNE_INF = 100; // Minimum avant d'approvisionner
     private  int current_stock;
-    private  int number; //Numéro de Compartiment
+    private  String name; //nom du Compartiment
 
 
-    public Compartiment(int i) {
-        this.number = i;
+    public Compartiment(String name) {
+        this.name = name;
         this.current_stock = QUANTITE_INITIAL;
     }
 
@@ -21,14 +21,14 @@ public class Compartiment {
             }
         }
         current_stock -= portion;
-        System.out.println(portion + "g pris dans le compartiment " + number + ".");
+        System.out.println(portion + "g pris dans le compartiment " + name + ".");
     }
 
     public synchronized void approvisionner() {
             if (current_stock < BORNE_INF) {
                 int manque = QUANTITE_INITIAL - current_stock;  // Ce qu'il manque pour atteindre le stock initial
                 this.current_stock += manque;
-                System.out.println("Le compartiment " + number + " a été approvisionné.");
+                System.out.println("Le compartiment " + name + " a été approvisionné.");
 
                 /* Réveille un client en attente sur un compartiment donné
                 *  En effet sachant qu'il ne peut y avoir qu'un seul client
