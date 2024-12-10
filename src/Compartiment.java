@@ -12,9 +12,13 @@ public class Compartiment {
        this.current_stock = QUANTITE_INITIAL;
     }
 
-    public synchronized void prendreNourriture(int portion) throws InterruptedException {
+    public synchronized void prendreNourriture(int portion) {
         while (current_stock < portion) {
-            wait();
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
         current_stock -= portion;
         System.out.println(portion + "g pris dans le compartiment " + number + ".");

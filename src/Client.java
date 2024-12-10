@@ -36,6 +36,7 @@ public class Client extends Thread {
             etat = EtatClient.AT_THE_BUFFET; // Mise à jour de l'état
         }
         System.out.println("Client " + id + " entre dans le restaurant.");
+
     }
 
     /*private void allerAuBuffet() throws InterruptedException {
