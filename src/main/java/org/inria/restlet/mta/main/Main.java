@@ -1,6 +1,6 @@
 package org.inria.restlet.mta.main;
 
-import org.inria.restlet.mta.application.BuffetApplication;
+import org.inria.restlet.mta.application.RestaurantApplication;
 import org.inria.restlet.mta.database.Restaurant;
 import org.restlet.Application;
 import org.restlet.Component;
@@ -10,7 +10,8 @@ import org.restlet.data.Protocol;
 /**
  * Main RESTlet minimal example
  *
- * @author msimonin
+ * @author afassassi
+ * @author aruphin
  */
 public final class Main
 {
@@ -35,7 +36,7 @@ public final class Main
         component.getServers().add(Protocol.HTTP, 8124);
 
         // Create an application
-        Application application = new BuffetApplication(context);
+        Application application = new RestaurantApplication(context);
 
         // Add the db into component's context
         Restaurant db = new Restaurant();

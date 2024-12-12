@@ -1,27 +1,27 @@
 package org.inria.restlet.mta.backend;
 
+import org.inria.restlet.mta.database.Restaurant;
+
 public class Employe extends Thread{
 
-    private final Restaurant restaurant;
+    private Compartiment[] compartiments;
 
-    public Employe(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public Employe(Compartiment[] compartiments) {
+        this.compartiments = compartiments;
     }
 
     @Override
     public void run() {
-        try {
-            while (true) {
-                for (Compartiment compartiment : restaurant.getCompartiments()) {
-                    synchronized (compartiment) {
-                        compartiment.approvisionner();
-                    }
-                }
-                Thread.sleep(500); // L'employé vérifie périodiquement
+        while (true) {
+            for (int i = 0; i < Restaurant.NB_COMPARTIMENTS; i++) {
+                compartiments[i].approvisionner();
             }
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
+            try {
+                Thread.sleep(500); // L'employé vérifie périodiquement
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
 package org.inria.restlet.mta.resources;
 
+import org.inria.restlet.mta.backend.Compartiment;
 import org.inria.restlet.mta.database.Restaurant;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -13,28 +15,23 @@ import org.restlet.resource.ServerResource;
  */
 public class BuffetResource extends ServerResource {
 
-    private Restaurant db_;
+    private Restaurant restaurant;
 
-    public BuffetResource() {
-        db_ = (Restaurant) getApplication().getContext().getAttributes()
-                .get("database");
+   @Override
+    public void doInit() {
+        restaurant = (Restaurant) getApplication().getContext().getAttributes().get("database");
     }
 
     @Get("json")
     public Representation getBuffetState() throws Exception {
-        JSONObject json = new JSONObject();
-        json.put("state", db_.getBuffetState());
-        return new JsonRepresentation(json);
-    }
-    @Put("json")
-    public Representation updateBuffetState(JsonRepresentation representation) throws Exception {
-        JSONObject json = representation.getJsonObject();
-        String newState = json.getString("state");
+        JSONArray buffetCompartiment = new JSONArray();
 
-        db_.setBuffetState(newState);
-
-        JSONObject result = new JSONObject();
-        result.put("state", db_.getBuffetState());
-        return new JsonRepresentation(result);
+        for(Compartiment compartiment : restaurant.getCompartiments()){
+            JSONObject jsonbuffetCompartiment = new JSONObject();
+            jsonbuffetCompartiment.put("Nom", compartiment.getName());
+            jsonbuffetCompartiment.put("Reste", compartiment.getCurrent_stock());
+            buffetCompartiment.put(jsonbuffetCompartiment);
+        }
+        return new JsonRepresentation(buffetCompartiment);
     }
 }

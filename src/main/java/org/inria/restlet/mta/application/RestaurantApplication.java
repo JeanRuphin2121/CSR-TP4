@@ -12,13 +12,14 @@ import org.restlet.routing.Router;
  *
  * Application.
  *
- * @author msimonin
+ * @author afassassi
+ * @author aruphin
  *
  */
-public class BuffetApplication extends Application
+public class RestaurantApplication extends Application
 {
 
-    public BuffetApplication(Context context)
+    public RestaurantApplication(Context context)
     {
         super(context);
     }
@@ -26,9 +27,10 @@ public class BuffetApplication extends Application
     @Override
     public Restlet createInboundRoot() {
         Router router = new Router(getContext());
-        router.attach("/users", ClientsResource.class);
-        router.attach("/users/{userId}", ClientResource.class);
-        router.attach("/users/{userId}/tweets", BuffetResource.class);
+        router.attach("/clients", ClientsResource.class);
+        router.attach("/buffet", BuffetResource.class);
+
+
         return router;
     }
 
